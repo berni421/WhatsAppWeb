@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Whats App Web</string>
+    <string name="title_activity_disclaimer">DisclaimerActivity</string>
+    <string name="disclaimer_text">Terms\n\nPlease ensure that before using this application that you expressly understand and agree that your use of this application is at your sole risk and that the application is provided “as is” and “as available” without warranty of any kind, to the maximum extent permitted by applicable law.\n\nOnce the applicable is available to you through your google account, you should check the application as soon as reasonably possible to ensure that it functions and performs as stated, and notify us or Provider as soon as reasonably possible if you find any errors or defect. See the Google Play Refund Policy for more information.</string>
+    <string name="disclaimer_accept">I accept these terms.</string>
+    <string name="dont_show_next_time">Do not show next time?</string>
+    <string name="welcome">"Whatsapp Web"</string>
+</resources>
