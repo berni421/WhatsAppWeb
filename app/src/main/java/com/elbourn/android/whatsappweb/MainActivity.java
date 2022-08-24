@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setBlockNetworkImage(true);
         webView.getSettings().setBuiltInZoomControls(true);
         webView.setInitialScale(100);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
         Log.i(TAG, "end onCreate");
     }
