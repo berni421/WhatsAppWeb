@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".IntroFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/introWelcomeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:autoLink="web"
+                android:linksClickable="true"
+                android:text="@string/intro_welcome"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/introWelcomeImage"
+                android:layout_width="128dp"
+                android:layout_height="192dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="Screenshot"
+                app:layout_constraintTop_toBottomOf="@id/introWelcomeTextView"
+                app:srcCompat="@drawable/screenshot_20220820_213011"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/introFeatures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/intro_features"
+                app:layout_constraintTop_toBottomOf="@id/introWelcomeImage" />
+
+            <ImageView
+                android:id="@+id/feedthecatImage"
+                android:layout_width="300dp"
+                android:layout_height="175dp"
+                android:padding="16dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/feedthecat"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/introFeatures"/>
+
+            <TextView
+                android:id="@+id/introDonateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@string/intro_donate_text"
+                app:layout_constraintTop_toBottomOf="@id/feedthecatImage" />
+
+
+            <CheckBox
+                android:id="@+id/introCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/dont_show_next_time"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/introDonateText" />
+
+            <ImageButton
+                android:id="@+id/introImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:contentDescription="touch to move to start Clock"
+                android:src="@android:drawable/ic_media_play"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/introDonateText" />
+
+            <TextView
+                android:id="@+id/introNextText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="To continue. Click play --^^"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/introImageButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

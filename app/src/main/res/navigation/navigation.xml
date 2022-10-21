@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/disclaimerFragment">
+
+
+    <fragment
+        android:id="@+id/disclaimerFragment"
+        android:name="com.elbourn.android.whatsappweb.DisclaimerFragment"
+        android:label="fragment_disclaimer"
+        tools:layout="@layout/fragment_disclaimer" >
+        <action
+            android:id="@+id/action_disclaimerFragment_to_introFragment"
+            app:destination="@id/introFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webviewFragment"
+        android:name="com.elbourn.android.whatsappweb.WebViewFragment"
+        android:label="fragment_webview"
+        tools:layout="@layout/fragment_webview" />
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.elbourn.android.whatsappweb.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment_to_webviewFragment"
+            app:destination="@id/webviewFragment" />
+    </fragment>
+</navigation>
