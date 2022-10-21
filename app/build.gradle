@@ -9,8 +9,8 @@ android {
         applicationId "com.elbourn.android.whatsappweb"
         minSdk 23
         targetSdk 32
-        versionCode 2
-        versionName "1.2"
+        versionCode 4
+        versionName "0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +25,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.elbourn.android.whatsappweb'
 }
 
 dependencies {
