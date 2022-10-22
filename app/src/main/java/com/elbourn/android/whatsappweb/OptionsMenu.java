@@ -78,16 +78,27 @@ public class OptionsMenu extends AppCompatActivity {
 
     void restartApp() {
         Log.i(TAG, "start restartApp");
-        // Clear web data
+        Context context = getApplicationContext();
+        // Check webviw is available
         WebView webView = (WebView) findViewById(R.id.webview);
-        webView.clearCache(true);
-        // restart app
-        Context ctx = getApplicationContext();
-        PackageManager pm = ctx.getPackageManager();
-        Intent intent = pm.getLaunchIntentForPackage(ctx.getPackageName());
-        Intent mainIntent = Intent.makeRestartActivityTask(intent.getComponent());
-        ctx.startActivity(mainIntent);
-        Runtime.getRuntime().exit(0);
+        if (webView == null) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    String msg = "Reconnect applies when Whatsapp is showing ...";
+                    Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            // Clear web data
+            webView.clearCache(true);
+            // restart app
+            Context ctx = getApplicationContext();
+            PackageManager pm = ctx.getPackageManager();
+            Intent intent = pm.getLaunchIntentForPackage(ctx.getPackageName());
+            Intent mainIntent = Intent.makeRestartActivityTask(intent.getComponent());
+            ctx.startActivity(mainIntent);
+            Runtime.getRuntime().exit(0);
+        }
         Log.i(TAG, "end restartApp");
     }
 
