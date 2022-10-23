@@ -1,6 +1,10 @@
 package com.elbourn.android.whatsappweb;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +14,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
+
 import androidx.fragment.app.Fragment;
 
 public class WebViewFragment extends Fragment {
@@ -17,6 +23,7 @@ public class WebViewFragment extends Fragment {
     static String APP = BuildConfig.APPLICATION_ID;
     static String TAG = "WebViewFragment";
     View view = null;
+    WebView webView = null;
     String Url = "https://web.whatsapp.com";
     String ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
 
@@ -40,22 +47,16 @@ public class WebViewFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.i(TAG, "start onResume");
-        startWebView(view);
+        if (webView != null) {
+            webView.loadUrl(Url);
+        }
         Log.i(TAG, "end onResume");
     }
 
     public void startWebView(View view) {
-
         Log.i(TAG, "start startWebView");
         WebView webView = (WebView) view.findViewById(R.id.webview);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
-                view.getContext().startActivity(intent);
-                return true;
-            }
-        });
+        webView.setWebViewClient(new MyWebViewClient());
         webView.getSettings().setUserAgentString(ua);
         webView.getSettings().setAppCacheEnabled(true);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -63,7 +64,6 @@ public class WebViewFragment extends Fragment {
         webView.getSettings().setGeolocationEnabled(true);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setDatabaseEnabled(true);
-        webView.getSettings().setSupportMultipleWindows(true);
         webView.getSettings().setNeedInitialFocus(true);
         webView.getSettings().setLoadWithOverviewMode(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -74,5 +74,19 @@ public class WebViewFragment extends Fragment {
         webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         webView.loadUrl(Url);
         Log.i(TAG, "end startWebView");
+    }
+
+    public final class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            Log.i(TAG, "start shouldOverrideUrlLoading");
+            Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
+            startActivity(i);
+            Context context = getContext();
+            String msg = "Starting application for the link ...";
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            return true;
+        }
+
     }
 }
