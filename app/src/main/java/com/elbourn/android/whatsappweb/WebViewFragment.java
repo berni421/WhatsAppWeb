@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 public class WebViewFragment extends Fragment {
 
     static String APP = BuildConfig.APPLICATION_ID;
-    static String TAG = "WebviewFragment";
+    static String TAG = "WebViewFragment";
     View view = null;
     String Url = "https://web.whatsapp.com";
     String ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
@@ -42,7 +42,7 @@ public class WebViewFragment extends Fragment {
         Log.i(TAG, "end onResume");
     }
 
-    void startWebView(View view) {
+    public void startWebView(View view) {
 
         Log.i(TAG, "start startWebView");
         WebView webView = (WebView) view.findViewById(R.id.webview);

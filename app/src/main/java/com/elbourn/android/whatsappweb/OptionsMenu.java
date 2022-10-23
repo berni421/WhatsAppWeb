@@ -1,7 +1,11 @@
 package com.elbourn.android.whatsappweb;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.fragment.NavHostFragment;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.webkit.WebViewFragment;
 import android.widget.Toast;
 
 public class OptionsMenu extends AppCompatActivity {
@@ -79,7 +84,7 @@ public class OptionsMenu extends AppCompatActivity {
     void restartApp() {
         Log.i(TAG, "start restartApp");
         Context context = getApplicationContext();
-        // Check webviw is available
+        // Check webview is available
         WebView webView = (WebView) findViewById(R.id.webview);
         if (webView == null) {
             runOnUiThread(new Runnable() {
@@ -91,13 +96,15 @@ public class OptionsMenu extends AppCompatActivity {
         } else {
             // Clear web data
             webView.clearCache(true);
-            // restart app
-            Context ctx = getApplicationContext();
-            PackageManager pm = ctx.getPackageManager();
-            Intent intent = pm.getLaunchIntentForPackage(ctx.getPackageName());
-            Intent mainIntent = Intent.makeRestartActivityTask(intent.getComponent());
-            ctx.startActivity(mainIntent);
-            Runtime.getRuntime().exit(0);
+            // Reload WebView;
+            webView.reload();
+
+//            // restart app
+//            PackageManager pm = context.getPackageManager();
+//            Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
+//            Intent mainIntent = Intent.makeRestartActivityTask(intent.getComponent());
+//            context.startActivity(mainIntent);
+//            Runtime.getRuntime().exit(0);
         }
         Log.i(TAG, "end restartApp");
     }

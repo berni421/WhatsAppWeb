@@ -84,7 +84,7 @@ public class IntroFragment extends Fragment {
         Boolean introCheckBox = sharedPreferences.getBoolean("introCheckBox", false);
     }
 
-    void startWebviewFragment() {
+    public void startWebviewFragment() {
         Log.i(TAG, "start startWebviewFragment");
         NavHostFragment.findNavController(this).navigate(R.id.action_introFragment_to_webviewFragment);
         Log.i(TAG, "end startWebviewFragment");
