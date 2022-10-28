@@ -80,17 +80,10 @@ public class WebViewFragment extends Fragment {
             Context context = getContext();
             String requestUrl = request.getUrl().toString();
             Log.i(TAG, "requestUrl: " + requestUrl);
-            if (requestUrl.equals("https://www.whatsapp.com/")) {
-                Log.i(TAG, "bugger - time to reset");
-                String msg = "Whatsapp session has ended. Please use menu logout and re-authorize this device";
-                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-            } else {
-                // Handle externally
-                Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
-                startActivity(i);
-                String msg = "Starting application for the link ...";
-                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-            }
+            Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
+            startActivity(i);
+            String msg = "Starting application for the link ...";
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
             return true;
         }
 

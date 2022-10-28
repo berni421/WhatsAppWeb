@@ -51,11 +51,8 @@ public class OptionsMenu extends AppCompatActivity {
             case R.id.menuDonate:
                 startDonationWebsite();
                 return true;
-            case R.id.reconnect:
-                reconnect();
-                return true;
-            case R.id.logout:
-                logout();
+            case R.id.reset:
+                reset();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -85,49 +82,13 @@ public class OptionsMenu extends AppCompatActivity {
         Log.i(TAG, "end startDonationWebsite");
     }
 
-    void reconnect() {
-        Log.i(TAG, "start reconnect");
+    void reset() {
+        Log.i(TAG, "start reset");
         Context context = getApplicationContext();
-        // Check webview is available
-        WebView webView = (WebView) findViewById(R.id.webview);
-        if (webView == null) {
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    String msg = "Reconnect applies when Whatsapp is showing ...";
-                    Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            // Clear cache data
-            webView.clearCache(true);
-            // Reload WebView;
-            webView.reload();
-        }
-        Log.i(TAG, "end reconnect");
+        // Clear all including shared data - and exit
+        ((ActivityManager) context.getSystemService(ACTIVITY_SERVICE))
+                .clearApplicationUserData();
+        // never reached
+        Log.i(TAG, "end resset");
     }
-
-    void logout() {
-        Log.i(TAG, "start logout");
-        Context context = getApplicationContext();
-        // Check webview is available
-        WebView webView = (WebView) findViewById(R.id.webview);
-        if (webView == null) {
-            runOnUiThread(new Runnable() {
-                public void run() {
-                    String msg = "Logout applies when Whatsapp is showing ...";
-                    Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-                }
-            });
-        } else {
-            // Clear all data - and exit
-            ((ActivityManager)context.getSystemService(ACTIVITY_SERVICE))
-                    .clearApplicationUserData();
-        }
-        Log.i(TAG, "end logout");
-
-
-
-    }
-
-
 }

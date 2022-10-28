@@ -7,12 +7,8 @@
         android:title="Do not show introduction page next time."
         app:showAsAction="never" />
     <item
-        android:id="@+id/reconnect"
-        android:title="Reconnect"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/logout"
-        android:title="Logout"
+        android:id="@+id/reset"
+        android:title="Reset"
         app:showAsAction="never" />
     <item
         android:id="@+id/menuDonate"
