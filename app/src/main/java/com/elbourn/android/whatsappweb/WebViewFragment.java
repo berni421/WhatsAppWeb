@@ -1,10 +1,7 @@
 package com.elbourn.android.whatsappweb;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +21,8 @@ public class WebViewFragment extends Fragment {
     static String TAG = "WebViewFragment";
     View view = null;
     WebView webView = null;
-    String Url = "https://web.whatsapp.com";
-    String ua = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
+    String url = "https://web.whatsapp.com/";
+    String ua = "Mozilla/5.0 (ECS Creators 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +45,7 @@ public class WebViewFragment extends Fragment {
         super.onResume();
         Log.i(TAG, "start onResume");
         if (webView != null) {
-            webView.loadUrl(Url);
+            webView.loadUrl(url);
         }
         Log.i(TAG, "end onResume");
     }
@@ -72,7 +69,7 @@ public class WebViewFragment extends Fragment {
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().supportZoom();
         webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        webView.loadUrl(Url);
+        webView.loadUrl(url);
         Log.i(TAG, "end startWebView");
     }
 
@@ -80,11 +77,20 @@ public class WebViewFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             Log.i(TAG, "start shouldOverrideUrlLoading");
-            Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
-            startActivity(i);
             Context context = getContext();
-            String msg = "Starting application for the link ...";
-            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            String requestUrl = request.getUrl().toString();
+            Log.i(TAG, "requestUrl: " + requestUrl);
+            if (requestUrl.equals("https://www.whatsapp.com/")) {
+                Log.i(TAG, "bugger - time to reset");
+                String msg = "Whatsapp session has ended. Please use menu logout and re-authorize this device";
+                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            } else {
+                // Handle externally
+                Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
+                startActivity(i);
+                String msg = "Starting application for the link ...";
+                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            }
             return true;
         }
 

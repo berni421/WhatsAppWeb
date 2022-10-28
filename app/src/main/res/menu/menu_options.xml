@@ -11,6 +11,10 @@
         android:title="Reconnect"
         app:showAsAction="never" />
     <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/menuDonate"
         android:title="Help feed the cat."
         app:showAsAction="never" />

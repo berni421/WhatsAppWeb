@@ -1,13 +1,11 @@
 package com.elbourn.android.whatsappweb;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.fragment.NavHostFragment;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,13 +13,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
+import android.webkit.WebStorage;
 import android.webkit.WebView;
-import android.webkit.WebViewFragment;
 import android.widget.Toast;
 
 public class OptionsMenu extends AppCompatActivity {
 
     private String TAG = "OptionsMenu";
+    static String APP = BuildConfig.APPLICATION_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,10 @@ public class OptionsMenu extends AppCompatActivity {
                 startDonationWebsite();
                 return true;
             case R.id.reconnect:
-                restartApp();
+                reconnect();
+                return true;
+            case R.id.logout:
+                logout();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -81,8 +85,8 @@ public class OptionsMenu extends AppCompatActivity {
         Log.i(TAG, "end startDonationWebsite");
     }
 
-    void restartApp() {
-        Log.i(TAG, "start restartApp");
+    void reconnect() {
+        Log.i(TAG, "start reconnect");
         Context context = getApplicationContext();
         // Check webview is available
         WebView webView = (WebView) findViewById(R.id.webview);
@@ -94,19 +98,36 @@ public class OptionsMenu extends AppCompatActivity {
                 }
             });
         } else {
-            // Clear web data
+            // Clear cache data
             webView.clearCache(true);
             // Reload WebView;
             webView.reload();
-
-//            // restart app
-//            PackageManager pm = context.getPackageManager();
-//            Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
-//            Intent mainIntent = Intent.makeRestartActivityTask(intent.getComponent());
-//            context.startActivity(mainIntent);
-//            Runtime.getRuntime().exit(0);
         }
-        Log.i(TAG, "end restartApp");
+        Log.i(TAG, "end reconnect");
     }
+
+    void logout() {
+        Log.i(TAG, "start logout");
+        Context context = getApplicationContext();
+        // Check webview is available
+        WebView webView = (WebView) findViewById(R.id.webview);
+        if (webView == null) {
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    String msg = "Logout applies when Whatsapp is showing ...";
+                    Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+                }
+            });
+        } else {
+            // Clear all data - and exit
+            ((ActivityManager)context.getSystemService(ACTIVITY_SERVICE))
+                    .clearApplicationUserData();
+        }
+        Log.i(TAG, "end logout");
+
+
+
+    }
+
 
 }
