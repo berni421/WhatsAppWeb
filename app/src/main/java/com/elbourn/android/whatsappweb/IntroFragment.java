@@ -3,13 +3,6 @@ package com.elbourn.android.whatsappweb;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class IntroFragment extends Fragment {
 
-    static String APP = BuildConfig.APPLICATION_ID;
+    static String APP = "com.elbourn.android.whatsappweb";
     static String TAG = "IntroFragment";
 
     @Override

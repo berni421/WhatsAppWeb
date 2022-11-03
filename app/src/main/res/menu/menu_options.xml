@@ -7,6 +7,10 @@
         android:title="Do not show introduction page next time."
         app:showAsAction="never" />
     <item
+        android:id="@+id/logout"
+        android:title="Logout (work in progress)"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/reset"
         android:title="Reset"
         app:showAsAction="never" />

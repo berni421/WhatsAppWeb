@@ -1,6 +1,5 @@
 package com.elbourn.android.whatsappweb;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,12 +16,11 @@ import androidx.fragment.app.Fragment;
 
 public class WebViewFragment extends Fragment {
 
-    static String APP = BuildConfig.APPLICATION_ID;
-    static String TAG = "WebViewFragment";
+    String APP = BuildConfig.APPLICATION_ID;
+    String TAG = "WebViewFragment";
+    String url = "https://web.whatsapp.com";
+    String ua = "Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
     View view = null;
-    WebView webView = null;
-    String url = "https://web.whatsapp.com/";
-    String ua = "Mozilla/5.0 (ECS Creators 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +34,8 @@ public class WebViewFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "start onViewCreated");
-        startWebView(view);
+        startWebView();
+        loadWebView();
         Log.i(TAG, "end onViewCreated");
     }
 
@@ -44,13 +43,11 @@ public class WebViewFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.i(TAG, "start onResume");
-        if (webView != null) {
-            webView.loadUrl(url);
-        }
+        loadWebView();
         Log.i(TAG, "end onResume");
     }
 
-    public void startWebView(View view) {
+    public void startWebView() {
         Log.i(TAG, "start startWebView");
         WebView webView = (WebView) view.findViewById(R.id.webview);
         webView.setWebViewClient(new MyWebViewClient());
@@ -69,23 +66,33 @@ public class WebViewFragment extends Fragment {
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.getSettings().supportZoom();
         webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        webView.loadUrl(url);
         Log.i(TAG, "end startWebView");
     }
 
-    public final class MyWebViewClient extends WebViewClient {
+    public void loadWebView() {
+        WebView webView = (WebView) view.findViewById(R.id.webview);
+        if (webView != null) {
+            webView.loadUrl(url);
+        }
+    }
+
+    class MyWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             Log.i(TAG, "start shouldOverrideUrlLoading");
-            Context context = getContext();
             String requestUrl = request.getUrl().toString();
             Log.i(TAG, "requestUrl: " + requestUrl);
+            if (requestUrl.equals("https://www.whatsapp.com/")) {
+                // at this point Whatsapp connection has failed
+                String msg = "Facebook seems to have disconnected this device. Use menu Reset to reconnect.";
+                Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                return false;
+            }
             Intent i = new Intent(Intent.ACTION_VIEW, request.getUrl());
             startActivity(i);
             String msg = "Starting application for the link ...";
-            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
             return true;
         }
-
     }
 }

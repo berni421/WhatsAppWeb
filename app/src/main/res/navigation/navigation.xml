@@ -5,7 +5,6 @@
     android:id="@+id/navigation"
     app:startDestination="@id/disclaimerFragment">
 
-
     <fragment
         android:id="@+id/disclaimerFragment"
         android:name="com.elbourn.android.whatsappweb.DisclaimerFragment"
@@ -19,7 +18,8 @@
         android:id="@+id/webviewFragment"
         android:name="com.elbourn.android.whatsappweb.WebViewFragment"
         android:label="fragment_webview"
-        tools:layout="@layout/fragment_webview" />
+        tools:layout="@layout/fragment_webview" >
+    </fragment>
     <fragment
         android:id="@+id/introFragment"
         android:name="com.elbourn.android.whatsappweb.IntroFragment"

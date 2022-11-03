@@ -1,28 +1,26 @@
 package com.elbourn.android.whatsappweb;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ActivityManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
-import android.webkit.WebStorage;
-import android.webkit.WebView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class OptionsMenu extends AppCompatActivity {
 
     private String TAG = "OptionsMenu";
-    static String APP = BuildConfig.APPLICATION_ID;
+    static String APP = "com.elbourn.android.whatsappweb";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +48,9 @@ public class OptionsMenu extends AppCompatActivity {
                 return true;
             case R.id.menuDonate:
                 startDonationWebsite();
+                return true;
+            case R.id.logout:
+                logout();
                 return true;
             case R.id.reset:
                 reset();
@@ -82,13 +83,25 @@ public class OptionsMenu extends AppCompatActivity {
         Log.i(TAG, "end startDonationWebsite");
     }
 
+    void logout() {
+        Log.i(TAG, "start logout");
+        getApplicationContext()
+                .getSharedPreferences(APP, MODE_PRIVATE)
+                .edit()
+                .putBoolean("logout", true)
+                .apply();
+        Log.i(TAG, "Reload app");
+        startActivity(new Intent(this, MainActivity.class));
+        finishAffinity();
+        Log.i(TAG, "end logout");
+    }
+
     void reset() {
         Log.i(TAG, "start reset");
-        Context context = getApplicationContext();
-        // Clear all including shared data - and exit
-        ((ActivityManager) context.getSystemService(ACTIVITY_SERVICE))
+        ((ActivityManager) getApplicationContext()
+                .getSystemService(ACTIVITY_SERVICE))
                 .clearApplicationUserData();
         // never reached
-        Log.i(TAG, "end resset");
+        Log.i(TAG, "end reset");
     }
 }
