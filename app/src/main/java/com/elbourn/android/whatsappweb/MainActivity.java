@@ -14,7 +14,7 @@ import kotlin.io.FilesKt;
 public class MainActivity extends OptionsMenu {
 
     static String APP = "com.elbourn.android.whatsappweb";
-    private String TAG = "MainActivity";
+    private String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,9 @@ public class MainActivity extends OptionsMenu {
     @Override
     public void onResume() {
         super.onResume();
-        // start main screen
+        Log.i(TAG, "start onResume");
         setContentView(R.layout.activity_main);
+        Log.i(TAG, "end onResume");
     }
 
     @Override
