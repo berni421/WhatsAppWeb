@@ -1,14 +1,13 @@
 package com.elbourn.android.whatsappweb;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebSettings;
-import android.webkit.WebStorage;
 
 import java.io.File;
+import java.util.List;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import kotlin.io.FilesKt;
 
 public class MainActivity extends OptionsMenu {
@@ -24,17 +23,16 @@ public class MainActivity extends OptionsMenu {
         boolean logout = getApplicationContext()
                 .getSharedPreferences(APP, MODE_PRIVATE)
                 .getBoolean("logout", false);
-        if (!logout) {
-            Log.i(TAG, "logout not requested");
-            return;
+        if (logout) {
+            Log.i(TAG, "Logout Requested");
+            clearApplicationData();
+            getApplicationContext()
+                    .getSharedPreferences(APP, MODE_PRIVATE)
+                    .edit()
+                    .putBoolean("logout", false)
+                    .apply();
         }
-        Log.i(TAG, "Logout Requested");
-        clearApplicationData();
-        getApplicationContext()
-                .getSharedPreferences(APP, MODE_PRIVATE)
-                .edit()
-                .putBoolean("logout", false)
-                .apply();
+        setContentView(R.layout.activity_main);
         Log.i(TAG, "end onCreate");
     }
 
@@ -42,14 +40,15 @@ public class MainActivity extends OptionsMenu {
     public void onResume() {
         super.onResume();
         Log.i(TAG, "start onResume");
-        setContentView(R.layout.activity_main);
         Log.i(TAG, "end onResume");
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        Log.i(TAG, "start onBackPressed");
         finishAffinity();
+        Log.i(TAG, "end onBackPressed");
     }
 
     void clearApplicationData() {

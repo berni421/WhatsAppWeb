@@ -8,7 +8,7 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/logout"
-        android:title="Logout (work in progress)"
+        android:title="Logout"
         app:showAsAction="never" />
     <item
         android:id="@+id/reset"
@@ -18,5 +18,4 @@
         android:id="@+id/menuDonate"
         android:title="Help feed the cat."
         app:showAsAction="never" />
-
 </menu>

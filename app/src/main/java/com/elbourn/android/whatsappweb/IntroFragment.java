@@ -40,6 +40,15 @@ public class IntroFragment extends Fragment {
         Log.i(TAG, "end onViewCreated");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        View view = this.getView();
+        if (view != null) {
+            setupButtons(view);
+        }
+    }
+
     void setupButtons(View view) {
         Log.i(TAG, "start setupButtons");
         ImageButton introImageButton = view.findViewById(R.id.introImageButton);
@@ -80,7 +89,7 @@ public class IntroFragment extends Fragment {
         Boolean introCheckBox = sharedPreferences.getBoolean("introCheckBox", false);
     }
 
-    public void startWebviewFragment() {
+    void startWebviewFragment() {
         Log.i(TAG, "start startWebviewFragment");
         NavHostFragment.findNavController(this).navigate(R.id.action_introFragment_to_webviewFragment);
         Log.i(TAG, "end startWebviewFragment");

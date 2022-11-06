@@ -18,8 +18,7 @@
         android:id="@+id/webviewFragment"
         android:name="com.elbourn.android.whatsappweb.WebViewFragment"
         android:label="fragment_webview"
-        tools:layout="@layout/fragment_webview" >
-    </fragment>
+        tools:layout="@layout/fragment_webview" />
     <fragment
         android:id="@+id/introFragment"
         android:name="com.elbourn.android.whatsappweb.IntroFragment"

@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 public class WebViewFragment extends Fragment {
 
@@ -36,7 +35,7 @@ public class WebViewFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "start onViewCreated");
-        startWebView();
+        setupWebView();
         Log.i(TAG, "end onViewCreated");
     }
 
@@ -44,48 +43,67 @@ public class WebViewFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.i(TAG, "start fragment onResume");
-        startWebView();
+        loadWebView();
         Log.i(TAG, "end fragment onResume");
     }
 
-    public void startWebView() {
-        Log.i(TAG, "start startWebView");
-        View v = this.getView();
-        if (v == null) {
-            Log.i(TAG, "v is null");
-            return;
+    public WebView getWebView() {
+        View view = this.getView();
+        if (view == null) {
+            Log.i(TAG, "view is null");
+            return null;
         }
-        WebView webView = (WebView) v.findViewById(R.id.webview);
-        if (webView == null) {
+        WebView webview = (WebView) view.findViewById(R.id.webview);
+        if (webview == null) {
+            Log.i(TAG, "webview is null");
+            return null;
+        }
+        return webview;
+    }
+
+    public void loadWebView() {
+        Log.i(TAG, "start resumeWebView");
+        WebView webview = getWebView();
+        if (webview == null) {
             Log.i(TAG, "webview is null");
             return;
         }
-        webView.loadUrl("about:blank");
-        webView.setWebViewClient(new MyWebViewClient());
-        webView.getSettings().setUserAgentString(UA);
-        webView.getSettings().setAppCacheEnabled(true);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setUseWideViewPort(true);
-        webView.getSettings().setGeolocationEnabled(true);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setDatabaseEnabled(true);
-        webView.getSettings().setNeedInitialFocus(true);
-        webView.getSettings().setLoadWithOverviewMode(true);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.getSettings().setBlockNetworkImage(false);
-        webView.getSettings().setBuiltInZoomControls(true);
-        webView.getSettings().setLoadsImagesAutomatically(true);
-        webView.getSettings().supportZoom();
-        webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        Map<String, String> m = new HashMap<String, String>()
-        {
+        webview.loadUrl("about:blank");
+        Map<String, String> m = new HashMap<String, String>() {
             {
                 put("https://www.whatsapp.com/", URL);
                 put("https://web.whatsapp.com/?post_logout=1", URL);
                 put("https://web.whatsapp.com/?post_logout=1&logout_reason=0", URL);
             }
         };
-        webView.loadUrl(URL, m);
+        webview.loadUrl(URL, m);
+        Log.i(TAG, "end resumeWebView");
+    }
+
+    public void setupWebView() {
+        Log.i(TAG, "start startWebView");
+        WebView webview = getWebView();
+        if (webview == null ) {
+            Log.i(TAG, "webview is null");
+            return;
+        }
+        webview.setWebViewClient(new MyWebViewClient());
+        webview.getSettings().setUserAgentString(UA);
+        webview.getSettings().setAppCacheEnabled(true);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setUseWideViewPort(true);
+        webview.getSettings().setGeolocationEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setDatabaseEnabled(true);
+        webview.getSettings().setNeedInitialFocus(true);
+        webview.getSettings().setLoadWithOverviewMode(true);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setBlockNetworkImage(false);
+        webview.getSettings().setBuiltInZoomControls(true);
+        webview.getSettings().setLoadsImagesAutomatically(true);
+        webview.getSettings().supportZoom();
+        webview.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        loadWebView();
         Log.i(TAG, "end startWebView");
     }
 

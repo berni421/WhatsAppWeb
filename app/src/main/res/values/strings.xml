@@ -6,5 +6,5 @@
     <string name="dont_show_next_time">Do not show next time?</string>
     <string name="intro_welcome">"Whatsapp Web\n\nFollow on screen instructions to link to your whatsapp account."</string>
     <string name="intro_donate_text">Please make a financial gift of your choice to support my software projects. See menu options top right - help feed the cat.</string>
-    <string name="intro_features">Attachments are not supported in this version.\n\nFacebook may disconnect your session periodically. Use menu Reset to remove settings then start again to re-authorize this device.</string>
+    <string name="intro_features">Attachments are not supported in this version.\n\nFacebook may disconnect your session periodically. Use menu Logout to remove settings then re-authorize this device. Use Reset to clear all setting, restart to authorize this device.</string>
 </resources>
