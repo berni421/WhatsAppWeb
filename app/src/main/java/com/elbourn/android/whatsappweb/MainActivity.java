@@ -47,10 +47,13 @@ public class MainActivity extends OptionsMenu {
     public void onBackPressed() {
         super.onBackPressed();
         Log.i(TAG, "start onBackPressed");
-        finishAffinity();
+        if (getForegroundFragment().getClass() == IntroFragment.class) {
+            Log.i(TAG, "IntroFragment exit");
+            finishAffinity();
+        }
         Log.i(TAG, "end onBackPressed");
     }
-
+    
     void clearApplicationData() {
         deleteHere(getFilesDir().getParent());
     }

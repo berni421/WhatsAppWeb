@@ -16,6 +16,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class OptionsMenu extends AppCompatActivity {
 
@@ -60,11 +63,43 @@ public class OptionsMenu extends AppCompatActivity {
         }
     }
 
+    public Fragment getForegroundFragment() {
+        FragmentManager childFM = getFM();
+        if (childFM == null) {
+            Log.i(TAG, "childFM is null");
+            return null;
+        }
+        Fragment current = childFM
+                .getFragments()
+                .get(0);
+        if (current == null) {
+            Log.i(TAG, "current is null");
+        }
+        return current;
+    }
+
+    FragmentManager getFM() {
+        Fragment navHostFragment = getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
+        if (navHostFragment == null) {
+            Log.i(TAG, "navHostFragment is null");
+            return null;
+        }
+        FragmentManager childFM = navHostFragment.
+                getChildFragmentManager();
+        if (childFM == null) {
+            Log.i(TAG, "childFM is null");
+            return null;
+        }
+        return childFM;
+    }
+
     void setIntroductionOff(MenuItem item) {
         Context context = getApplicationContext();
         Boolean subscriptionsIntroOff = !item.isChecked();
         item.setChecked(subscriptionsIntroOff);
         IntroFragment.setIntroCheckBox(context, subscriptionsIntroOff);
+        reloadApp();
         Log.i(TAG, "subscriptionsIntroOff: " + subscriptionsIntroOff);
     }
 
@@ -90,10 +125,15 @@ public class OptionsMenu extends AppCompatActivity {
                 .edit()
                 .putBoolean("logout", true)
                 .apply();
-        Log.i(TAG, "Reload app");
+        reloadApp();
+        Log.i(TAG, "end logout");
+    }
+
+    void reloadApp() {
+        Log.i(TAG, "start reloadApp");
         startActivity(new Intent(this, MainActivity.class));
         finishAffinity();
-        Log.i(TAG, "end logout");
+        Log.i(TAG, "end reloadApp");
     }
 
     void reset() {
