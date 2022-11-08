@@ -125,8 +125,16 @@ public class OptionsMenu extends AppCompatActivity {
                 .edit()
                 .putBoolean("logout", true)
                 .apply();
+        String msg = "Logout requested. Restarting...";
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
         reloadApp();
         Log.i(TAG, "end logout");
+    }
+
+    void stopApp() {
+        Log.i(TAG, "start stopApp");
+        finishAffinity();
+        Log.i(TAG, "end stopApp");
     }
 
     void reloadApp() {

@@ -1,7 +1,12 @@
 package com.elbourn.android.whatsappweb;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.webkit.WebStorage;
+import android.webkit.WebView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
@@ -25,12 +30,16 @@ public class MainActivity extends OptionsMenu {
                 .getBoolean("logout", false);
         if (logout) {
             Log.i(TAG, "Logout Requested");
+            WebStorage.getInstance().deleteAllData();
             clearApplicationData();
             getApplicationContext()
                     .getSharedPreferences(APP, MODE_PRIVATE)
                     .edit()
                     .putBoolean("logout", false)
                     .apply();
+            String msg = "Logout processed. Restarting...";
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+            reloadApp();
         }
         setContentView(R.layout.activity_main);
         Log.i(TAG, "end onCreate");
@@ -51,11 +60,18 @@ public class MainActivity extends OptionsMenu {
             Log.i(TAG, "IntroFragment exit");
             finishAffinity();
         }
+        if (getForegroundFragment().getClass() == WebViewFragment.class &&
+            IntroFragment.getIntroCheckBox(getApplicationContext())) {
+            Log.i(TAG, "WebViewFragment exit");
+            finishAffinity();
+        }
         Log.i(TAG, "end onBackPressed");
     }
-    
+
     void clearApplicationData() {
+        Log.i(TAG, "start clearApplicationData");
         deleteHere(getFilesDir().getParent());
+        Log.i(TAG, "end clearApplicationData");
     }
 
     void deleteHere(String folder) {
@@ -64,8 +80,9 @@ public class MainActivity extends OptionsMenu {
         if (here.exists()) {
             String[] fileNames = here.list();
             for (String fileName : fileNames) {
-                if (fileName.equals("shared_prefs")) {
-                    deleteFile(new File(here, "shared_prefs/WebViewChromiumPrefs.xml"));
+                String sp = "shared_prefs";
+                if (fileName.equals(sp)) {
+                    pruneSharedPrefs(folder + File.separator + sp);
                 } else {
                     deleteFile(new File(here, fileName));
                 }
@@ -78,13 +95,35 @@ public class MainActivity extends OptionsMenu {
         Log.i(TAG, "end deleteHere");
     }
 
+    void pruneSharedPrefs(String spF) {
+        Log.i(TAG, "start pruneSharedPrefs");
+        File spHere = new File(spF);
+        if (!spHere.exists()) {
+            Log.i(TAG, "spHere is empty");
+            return;
+        }
+        String[] spfNames = spHere.list();
+        for (String spName : spfNames) {
+            if (!spName.equals(APP + ".xml")) {
+                deleteFile(new File(spHere, spName));
+            }
+        }
+        Log.i(TAG, "end pruneSharedPrefs");
+    }
+
     void deleteFile(File file) {
         Log.i(TAG, "deleteFile: " + file);
         if (file != null) {
             if (file.isDirectory()) {
-                FilesKt.deleteRecursively(file);
-            } else {
-                file.delete();
+                String[] filenames = file.list();
+                for (String filename : filenames) {
+                    deleteFile(new File(file, filename));
+                }
+            }
+            if (!file.delete()) {
+                String df = file.getName() + ".duff";
+                Log.i(TAG, "renamed: " + df);
+                file.renameTo(new File(df));
             }
         }
     }

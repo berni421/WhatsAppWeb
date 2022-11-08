@@ -6,14 +6,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import androidx.fragment.app.Fragment;
 
@@ -22,7 +26,7 @@ public class WebViewFragment extends Fragment {
     String APP = BuildConfig.APPLICATION_ID;
     String TAG = getClass().getSimpleName();
     String URL = "https://web.whatsapp.com";
-    String UA = "Mozilla/5.0 (Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
+    String UA = "Mozilla/5.0 (Linux 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,14 +41,6 @@ public class WebViewFragment extends Fragment {
         Log.i(TAG, "start onViewCreated");
         setupWebView();
         Log.i(TAG, "end onViewCreated");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.i(TAG, "start fragment onResume");
-        loadWebView();
-        Log.i(TAG, "end fragment onResume");
     }
 
     public WebView getWebView() {
@@ -69,14 +65,7 @@ public class WebViewFragment extends Fragment {
             return;
         }
         webview.loadUrl("about:blank");
-        Map<String, String> m = new HashMap<String, String>() {
-            {
-                put("https://www.whatsapp.com/", URL);
-                put("https://web.whatsapp.com/?post_logout=1", URL);
-                put("https://web.whatsapp.com/?post_logout=1&logout_reason=0", URL);
-            }
-        };
-        webview.loadUrl(URL, m);
+        webview.loadUrl(URL);
         Log.i(TAG, "end resumeWebView");
     }
 
