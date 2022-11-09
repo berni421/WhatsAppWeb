@@ -26,7 +26,7 @@ public class WebViewFragment extends Fragment {
     String APP = BuildConfig.APPLICATION_ID;
     String TAG = getClass().getSimpleName();
     String URL = "https://web.whatsapp.com";
-    String UA = "Mozilla/5.0 (Linux 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
+    String UA = "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,15 +58,15 @@ public class WebViewFragment extends Fragment {
     }
 
     public void loadWebView() {
-        Log.i(TAG, "start resumeWebView");
+        Log.i(TAG, "start loadWebView");
         WebView webview = getWebView();
         if (webview == null) {
             Log.i(TAG, "webview is null");
             return;
         }
-        webview.loadUrl("about:blank");
         webview.loadUrl(URL);
-        Log.i(TAG, "end resumeWebView");
+        webview.getSettings().setUserAgentString(UA);
+        Log.i(TAG, "end loadWebView");
     }
 
     public void setupWebView() {
@@ -77,7 +77,6 @@ public class WebViewFragment extends Fragment {
             return;
         }
         webview.setWebViewClient(new MyWebViewClient());
-        webview.getSettings().setUserAgentString(UA);
         webview.getSettings().setAppCacheEnabled(true);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setUseWideViewPort(true);
