@@ -1,24 +1,20 @@
 package com.elbourn.android.whatsappweb;
 
 import android.app.ActivityManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.WebStorage;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 public class OptionsMenu extends AppCompatActivity {
 
@@ -52,10 +48,13 @@ public class OptionsMenu extends AppCompatActivity {
             case R.id.menuDonate:
                 startDonationWebsite();
                 return true;
-            case R.id.logout:
+            case R.id.menuReload:
+                reloadApp();
+                return true;
+            case R.id.menuLogout:
                 logout();
                 return true;
-            case R.id.reset:
+            case R.id.menuReset:
                 reset();
                 return true;
             default:
@@ -110,11 +109,10 @@ public class OptionsMenu extends AppCompatActivity {
             public void run() {
                 String msg = "Starting browser to feed the cat ...";
                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
-            }
-        });
-        String url = "https://www.elbourn.com/feed-the-cat/";
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(browserIntent);
+                String url = "https://www.elbourn.com/feed-the-cat/";
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(browserIntent);
+            }});
         Log.i(TAG, "end startDonationWebsite");
     }
 
@@ -125,9 +123,12 @@ public class OptionsMenu extends AppCompatActivity {
                 .edit()
                 .putBoolean("logout", true)
                 .apply();
-        String msg = "Logout requested. Restarting...";
-        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-        reloadApp();
+        String msg = "Logout requested...";
+        runOnUiThread(new Runnable() {
+            public void run() {
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                reloadApp();
+            }});
         Log.i(TAG, "end logout");
     }
 
@@ -139,8 +140,13 @@ public class OptionsMenu extends AppCompatActivity {
 
     void reloadApp() {
         Log.i(TAG, "start reloadApp");
-        startActivity(new Intent(this, MainActivity.class));
-        finishAffinity();
+        runOnUiThread(new Runnable() {
+            public void run() {
+                String msg = "Restarting...";
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finishAffinity();
+            }});
         Log.i(TAG, "end reloadApp");
     }
 

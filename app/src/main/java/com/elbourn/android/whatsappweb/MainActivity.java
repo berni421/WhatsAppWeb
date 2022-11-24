@@ -37,8 +37,6 @@ public class MainActivity extends OptionsMenu {
                     .edit()
                     .putBoolean("logout", false)
                     .apply();
-            String msg = "Logout processed. Restarting...";
-            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             reloadApp();
         }
         setContentView(R.layout.activity_main);

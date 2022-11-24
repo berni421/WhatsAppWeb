@@ -4,18 +4,22 @@
     <item
         android:id="@+id/menuIntroOff"
         android:checkable="true"
-        android:title="Do not show introduction page next time."
+        android:title="Do not show introduction page next time"
         app:showAsAction="never" />
     <item
-        android:id="@+id/logout"
-        android:title="Logout (work in progress)"
+        android:id="@+id/menuReload"
+        android:title="Reload"
         app:showAsAction="never" />
     <item
-        android:id="@+id/reset"
+        android:id="@+id/menuLogout"
+        android:title="Logout"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menuReset"
         android:title="Reset"
         app:showAsAction="never" />
     <item
         android:id="@+id/menuDonate"
-        android:title="Help feed the cat."
+        android:title="Help feed the cat"
         app:showAsAction="never" />
 </menu>

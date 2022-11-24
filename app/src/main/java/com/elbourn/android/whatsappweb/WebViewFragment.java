@@ -26,7 +26,8 @@ public class WebViewFragment extends Fragment {
     String APP = BuildConfig.APPLICATION_ID;
     String TAG = getClass().getSimpleName();
     String URL = "https://web.whatsapp.com";
-    String UA = "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0";
+//    String UA = "Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0";
+    String UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15"; // 24/11/22
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
