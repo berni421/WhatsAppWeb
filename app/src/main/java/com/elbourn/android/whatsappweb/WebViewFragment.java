@@ -21,6 +21,8 @@ import java.util.Random;
 
 import androidx.fragment.app.Fragment;
 
+import static android.webkit.WebSettings.LOAD_NO_CACHE;
+
 public class WebViewFragment extends Fragment {
 
     String APP = BuildConfig.APPLICATION_ID;
@@ -50,7 +52,7 @@ public class WebViewFragment extends Fragment {
             Log.i(TAG, "view is null");
             return null;
         }
-        WebView webview = (WebView) view.findViewById(R.id.webview);
+        WebView webview = view.findViewById(R.id.webview);
         if (webview == null) {
             Log.i(TAG, "webview is null");
             return null;
@@ -78,7 +80,9 @@ public class WebViewFragment extends Fragment {
             return;
         }
         webview.setWebViewClient(new MyWebViewClient());
-        webview.getSettings().setAppCacheEnabled(true);
+
+//        webview.getSettings().setAppCacheEnabled(true);
+        webview.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setUseWideViewPort(true);
         webview.getSettings().setGeolocationEnabled(true);
