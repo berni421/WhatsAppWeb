@@ -1,4 +1,4 @@
-package com.elbourn.android.whatsappweb;
+package com.elbourn.android.whatsappweb.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
+import com.elbourn.android.whatsappweb.R;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -24,15 +27,19 @@ public class IntroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_intro, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_intro, container, false);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "start onViewCreated");
-        if (getIntroCheckBox(getContext())) {
+        Context context = getContext();
+        if (context == null) {
+            Log.i(TAG, "context is null");
+            return;
+        }
+        if (getIntroCheckBox(context)) {
             startWebviewFragment();
         } else {
             setupButtons(view);
@@ -66,6 +73,10 @@ public class IntroFragment extends Fragment {
                 Log.i(TAG, "introCheckBox clicked");
                 CheckBox checkBox = (CheckBox) v;
                 Context context = getContext();
+                if (context == null) {
+                    Log.i(TAG, "context is null");
+                    return;
+                }
                 setIntroCheckBox(context, checkBox.isChecked());
             }
         });
@@ -86,7 +97,6 @@ public class IntroFragment extends Fragment {
         } else {
             sharedPreferences.edit().putBoolean("introCheckBox", false).apply();
         }
-        Boolean introCheckBox = sharedPreferences.getBoolean("introCheckBox", false);
     }
 
     void startWebviewFragment() {
