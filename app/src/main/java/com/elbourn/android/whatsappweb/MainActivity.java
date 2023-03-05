@@ -1,24 +1,18 @@
 package com.elbourn.android.whatsappweb;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.webkit.WebStorage;
-import android.webkit.WebView;
-import android.widget.Toast;
+
+import com.elbourn.android.whatsappweb.fragments.IntroFragment;
+import com.elbourn.android.whatsappweb.fragments.WebViewFragment;
 
 import java.io.File;
-import java.util.List;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import kotlin.io.FilesKt;
 
 public class MainActivity extends OptionsMenu {
 
-    static String APP = "com.elbourn.android.whatsappweb";
-    private String TAG = getClass().getSimpleName();
+    String APP = BuildConfig.APPLICATION_ID;
+    String TAG = getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,8 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.WebStorage;
 import android.widget.Toast;
+
+import com.elbourn.android.whatsappweb.fragments.IntroFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -84,18 +85,12 @@ public class OptionsMenu extends AppCompatActivity {
             Log.i(TAG, "navHostFragment is null");
             return null;
         }
-        FragmentManager childFM = navHostFragment.
-                getChildFragmentManager();
-        if (childFM == null) {
-            Log.i(TAG, "childFM is null");
-            return null;
-        }
-        return childFM;
+        return navHostFragment.getChildFragmentManager();
     }
 
     void setIntroductionOff(MenuItem item) {
         Context context = getApplicationContext();
-        Boolean subscriptionsIntroOff = !item.isChecked();
+        boolean subscriptionsIntroOff = !item.isChecked();
         item.setChecked(subscriptionsIntroOff);
         IntroFragment.setIntroCheckBox(context, subscriptionsIntroOff);
         reloadApp();

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/disclaimerFragment"
-        android:name="com.elbourn.android.whatsappweb.DisclaimerFragment"
+        android:name="com.elbourn.android.whatsappweb.fragments.DisclaimerFragment"
         android:label="fragment_disclaimer"
         tools:layout="@layout/fragment_disclaimer" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/webviewFragment"
-        android:name="com.elbourn.android.whatsappweb.WebViewFragment"
+        android:name="com.elbourn.android.whatsappweb.fragments.WebViewFragment"
         android:label="fragment_webview"
         tools:layout="@layout/fragment_webview" />
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.elbourn.android.whatsappweb.IntroFragment"
+        android:name="com.elbourn.android.whatsappweb.fragments.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
