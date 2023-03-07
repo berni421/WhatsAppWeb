@@ -1,9 +1,12 @@
 package com.elbourn.android.whatsappweb;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.PermissionRequest;
 import android.webkit.WebStorage;
 
+import com.elbourn.android.whatsappweb.Webview.MyWebChromeClient;
 import com.elbourn.android.whatsappweb.fragments.IntroFragment;
 import com.elbourn.android.whatsappweb.fragments.WawFragment;
 
@@ -53,7 +56,7 @@ public class MainActivity extends OptionsMenu {
             finishAffinity();
         }
         if (getForegroundFragment().getClass() == WawFragment.class &&
-            IntroFragment.getIntroCheckBox(getApplicationContext())) {
+                IntroFragment.getIntroCheckBox(getApplicationContext())) {
             Log.i(TAG, "WebViewFragment exit");
             finishAffinity();
         }
@@ -118,5 +121,11 @@ public class MainActivity extends OptionsMenu {
                 file.renameTo(new File(df));
             }
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        MyWebChromeClient.handleFileChooserResult(data);
     }
 }

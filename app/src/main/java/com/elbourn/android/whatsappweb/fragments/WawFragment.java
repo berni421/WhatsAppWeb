@@ -28,7 +28,9 @@ public class WawFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "start onViewCreated");
-        new Waw(getActivity(), getContext(), view.findViewById(R.id.webview));
+        new Waw(getActivity(),
+                getContext(),
+                view.findViewById(R.id.webview));
         Log.i(TAG, "end onViewCreated");
     }
 }

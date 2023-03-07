@@ -1,5 +1,6 @@
 package com.elbourn.android.whatsappweb;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +10,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.Toast;
 
+import com.elbourn.android.whatsappweb.Webview.MyWebChromeClient;
 import com.elbourn.android.whatsappweb.fragments.IntroFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +48,12 @@ public class OptionsMenu extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+            case R.id.menuKeyboardOff:
+                keyboardOff();
+                return true;
+            case R.id.menuKeyboardOn:
+                keyboardOn();
+                return true;
             case R.id.menuIntroOff:
                 setIntroductionOff(item);
                 return true;
@@ -62,6 +73,29 @@ public class OptionsMenu extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void keyboardOff() {
+        // turn off keyboard
+        ViewGroup container = findViewById(R.id.layout);
+        if (container == null) return;
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        container.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+        WebView webview = container.findViewById(R.id.webview);
+        if (webview == null) return;
+        webview.getRootView().requestFocus();
+        if (getCurrentFocus() == null) return;
+        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        Log.i(TAG, "keyboard off");
+    }
+
+    public void keyboardOn() {
+        // turn on keyboard
+        ViewGroup container = findViewById(R.id.layout);
+        if (container == null) return;
+        container.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
+        Log.i(TAG, "keyboard on");
+    }
+
 
     public Fragment getForegroundFragment() {
         FragmentManager childFM = getFM();
