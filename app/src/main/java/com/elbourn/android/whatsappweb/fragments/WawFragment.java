@@ -13,7 +13,7 @@ import com.elbourn.android.whatsappweb.Webview.Waw;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-public class WebViewFragment extends Fragment {
+public class WawFragment extends Fragment {
     String APP = BuildConfig.APPLICATION_ID;
     String TAG = getClass().getSimpleName();
 
@@ -28,7 +28,7 @@ public class WebViewFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.i(TAG, "start onViewCreated");
-        new Waw(getActivity(), view.findViewById(R.id.webview));
+        new Waw(getActivity(), getContext(), view.findViewById(R.id.webview));
         Log.i(TAG, "end onViewCreated");
     }
 }

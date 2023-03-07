@@ -1,7 +1,6 @@
 package com.elbourn.android.whatsappweb.Webview;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -17,11 +16,11 @@ import static androidx.core.content.ContextCompat.startActivity;
 public class MyWebViewClient extends WebViewClient {
     String APP = BuildConfig.APPLICATION_ID;
     String TAG = getClass().getSimpleName();
-    Context activity;
+    Context context;
 
-    public MyWebViewClient(Activity activity) {
+    public MyWebViewClient(Context context) {
         Log.i(TAG, "start MyWebViewClient");
-        this.activity = activity;
+        this.context = context;
     }
 
     @Override
@@ -31,16 +30,16 @@ public class MyWebViewClient extends WebViewClient {
         Log.i(TAG, "requestUrl: " + requestUrl);
         if (requestUrl.startsWith("https://www.whatsapp.com/")) {
             // at this point Whatsapp connection has failed
-            String msg = "Facebook seems to have disconnected this device. Use menu Reset or Logout and reconnect.";
-            Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            String msg = "Facebook may have disconnected this device. Try back button. Use menu Reset or Logout and reconnect.";
+            Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
             return false;
         } else if (requestUrl.startsWith(Waw.URL)) {
             return super.shouldOverrideUrlLoading(view, request);
         } else {
             Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
-            startActivity(activity.getApplicationContext(), intent, null);
+            startActivity(context, intent, null);
             String msg = "Starting application for the link ...";
-            Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
             return true;
         }
     }

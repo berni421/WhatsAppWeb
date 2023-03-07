@@ -12,7 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsAppWeb"
         android:hardwareAccelerated="true"
-        android:enableOnBackInvokedCallback="true"
         tools:targetApi="33">
         <activity
             android:name=".MainActivity"

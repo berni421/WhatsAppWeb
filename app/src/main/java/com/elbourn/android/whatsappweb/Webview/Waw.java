@@ -1,6 +1,7 @@
 package com.elbourn.android.whatsappweb.Webview;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -14,8 +15,18 @@ public class Waw {
     public static String URL = "https://web.whatsapp.com/";
     String UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36";
 
-    public Waw(Activity activity, WebView webview) {
+    public Waw(Activity activity,
+               Context context,
+               WebView webview) {
         Log.i(TAG, "start setupWebView");
+        if (activity == null ) {
+            Log.i(TAG, "activity is null");
+            return;
+        }
+        if (context == null ) {
+            Log.i(TAG, "context is null");
+            return;
+        }
         if (webview == null ) {
             Log.i(TAG, "webview is null");
             return;
@@ -23,7 +34,7 @@ public class Waw {
 
         // Intercept web requests
         webview.setWebChromeClient(new MyWebChromeClient(activity));
-        webview.setWebViewClient(new MyWebViewClient(activity));
+        webview.setWebViewClient(new MyWebViewClient(context));
 
         // For the web site
         webview.getSettings().setAllowFileAccess(true);

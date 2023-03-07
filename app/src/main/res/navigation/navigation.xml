@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/webviewFragment"
-        android:name="com.elbourn.android.whatsappweb.fragments.WebViewFragment"
+        android:name="com.elbourn.android.whatsappweb.fragments.WawFragment"
         android:label="fragment_webview"
         tools:layout="@layout/fragment_webview" />
     <fragment

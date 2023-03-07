@@ -5,7 +5,7 @@ import android.util.Log;
 import android.webkit.WebStorage;
 
 import com.elbourn.android.whatsappweb.fragments.IntroFragment;
-import com.elbourn.android.whatsappweb.fragments.WebViewFragment;
+import com.elbourn.android.whatsappweb.fragments.WawFragment;
 
 import java.io.File;
 
@@ -52,7 +52,7 @@ public class MainActivity extends OptionsMenu {
             Log.i(TAG, "IntroFragment exit");
             finishAffinity();
         }
-        if (getForegroundFragment().getClass() == WebViewFragment.class &&
+        if (getForegroundFragment().getClass() == WawFragment.class &&
             IntroFragment.getIntroCheckBox(getApplicationContext())) {
             Log.i(TAG, "WebViewFragment exit");
             finishAffinity();
