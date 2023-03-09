@@ -40,6 +40,7 @@ public class MyWebChromeClient extends WebChromeClient {
         Log.i(TAG, "start handleResult");
         if (data == null) return;
         Uri result = data.getData();
+        if (result == null) return;
         Uri[] results = new Uri[1];
         results[0] = result;
         filePathValueCallback.onReceiveValue(results);
