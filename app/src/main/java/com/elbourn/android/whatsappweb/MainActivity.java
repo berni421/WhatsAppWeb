@@ -126,6 +126,11 @@ public class MainActivity extends OptionsMenu {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        MyWebChromeClient.handleFileChooserResult(data);
+        Log.i(TAG, "start onActivityResult");
+        if (resultCode == RESULT_OK) {
+            MyWebChromeClient.handleFileChooserResult(data);
+        } else {
+            MyWebChromeClient.handleFileChooserResult(null);
+        }
     }
 }

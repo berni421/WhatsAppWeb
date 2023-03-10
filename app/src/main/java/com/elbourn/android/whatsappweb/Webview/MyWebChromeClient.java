@@ -38,9 +38,15 @@ public class MyWebChromeClient extends WebChromeClient {
 
     public static void handleFileChooserResult(Intent data) {
         Log.i(TAG, "start handleResult");
-        if (data == null) return;
+        if (data == null) {
+            filePathValueCallback.onReceiveValue(null);
+            return;
+        }
         Uri result = data.getData();
-        if (result == null) return;
+        if (result == null) {
+            filePathValueCallback.onReceiveValue(null);
+            return;
+        }
         Uri[] results = new Uri[1];
         results[0] = result;
         filePathValueCallback.onReceiveValue(results);
