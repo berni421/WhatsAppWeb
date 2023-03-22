@@ -127,7 +127,7 @@ public class OptionsMenu extends AppCompatActivity {
         boolean subscriptionsIntroOff = !item.isChecked();
         item.setChecked(subscriptionsIntroOff);
         IntroFragment.setIntroCheckBox(context, subscriptionsIntroOff);
-        reloadApp();
+//        reloadApp();
         Log.i(TAG, "subscriptionsIntroOff: " + subscriptionsIntroOff);
     }
 
