@@ -49,15 +49,10 @@ public class MainActivity extends OptionsMenu {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+//            super.onBackPressed();
         Log.i(TAG, "start onBackPressed");
         if (getForegroundFragment().getClass() == IntroFragment.class) {
             Log.i(TAG, "IntroFragment exit");
-            finishAffinity();
-        }
-        if (getForegroundFragment().getClass() == WawFragment.class &&
-                IntroFragment.getIntroCheckBox(getApplicationContext())) {
-            Log.i(TAG, "WebViewFragment exit");
             finishAffinity();
         }
         Log.i(TAG, "end onBackPressed");

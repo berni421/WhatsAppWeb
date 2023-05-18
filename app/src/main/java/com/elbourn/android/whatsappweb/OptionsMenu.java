@@ -69,6 +69,9 @@ public class OptionsMenu extends AppCompatActivity {
             case R.id.menuReset:
                 reset();
                 return true;
+            case R.id.menuExit:
+                closeApp();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -141,7 +144,8 @@ public class OptionsMenu extends AppCompatActivity {
                 String url = "https://www.elbourn.com/feed-the-cat/";
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(browserIntent);
-            }});
+            }
+        });
         Log.i(TAG, "end startDonationWebsite");
     }
 
@@ -157,7 +161,8 @@ public class OptionsMenu extends AppCompatActivity {
             public void run() {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                 reloadApp();
-            }});
+            }
+        });
         Log.i(TAG, "end logout");
     }
 
@@ -175,7 +180,8 @@ public class OptionsMenu extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finishAffinity();
-            }});
+            }
+        });
         Log.i(TAG, "end reloadApp");
     }
 
@@ -186,5 +192,11 @@ public class OptionsMenu extends AppCompatActivity {
                 .clearApplicationUserData();
         // never reached
         Log.i(TAG, "end reset");
+    }
+
+    void closeApp() {
+        Log.i(TAG, "WebViewFragment exit");
+        finishAffinity();
+        Log.i(TAG, "end closeApp");
     }
 }

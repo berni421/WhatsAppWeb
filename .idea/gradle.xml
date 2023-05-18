@@ -9,8 +9,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/Dropbox/Documents/AndroidStudioProjects/WhatsAppWeb" />
-            <option value="$USER_HOME$/Dropbox/Documents/AndroidStudioProjects/WhatsAppWeb/app" />
+            <option value="$USER_HOME$/Documents/AndroidStudioProjects/WhatsAppWeb" />
+            <option value="$USER_HOME$/Documents/AndroidStudioProjects/WhatsAppWeb/app" />
           </set>
         </option>
       </GradleProjectSettings>
