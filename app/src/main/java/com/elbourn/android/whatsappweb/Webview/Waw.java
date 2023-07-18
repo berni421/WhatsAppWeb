@@ -64,6 +64,10 @@ public class Waw {
         webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setDisplayZoomControls(false);
 
+        // Scroll
+
+        webview.setHorizontalScrollBarEnabled(true);
+
         // Javascript
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setSaveFormData(true);
