@@ -4,12 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.elbourn.android.whatsappweb.BuildConfig;
-import com.elbourn.android.whatsappweb.R;
 
 public class Waw {
     String APP = BuildConfig.APPLICATION_ID;
