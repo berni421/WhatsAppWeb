@@ -35,6 +35,10 @@ public class MyWebViewClient extends WebViewClient {
             return false;
         } else if (requestUrl.startsWith(Waw.URL)) {
             return super.shouldOverrideUrlLoading(view, request);
+        } else if (requestUrl.startsWith("ms-windows-store:")) {
+            /* trap and abort calls to apps store */
+            Log.i(TAG, requestUrl + " aborted.");
+            return true;
         } else {
             Intent intent = new Intent(Intent.ACTION_VIEW, request.getUrl());
             startActivity(context, intent, null);

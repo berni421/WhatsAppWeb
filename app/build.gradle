@@ -9,8 +9,8 @@ android {
         applicationId "com.elbourn.android.whatsappweb"
         minSdk 23
         targetSdk 33
-        versionCode 31
-        versionName "1.0.10"
+        versionCode 32
+        versionName "1.0.11"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
