@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Whatsapp web</string>
+    <string name="app_name">Unofficial Whatsapp browser client</string>
     <string name="title_activity_disclaimer">DisclaimerActivity</string>
     <string name="disclaimer_text">Terms
         \n\nPlease ensure that before using this application that you expressly understand and
@@ -19,5 +19,5 @@
         support my software projects. See menu options top right - help feed the cat.</string>
     <string name="intro_features">Facebook may disconnect your session periodically:
         \n\n- Use menu Logout to remove settings then re-authorize this device.
-        \n\n- Use Reset to clear all setting, restart to authorize this device.</string>
+        \n\n- Use Reset to clear all settings and data, restart to authorize this device.</string>
 </resources>
